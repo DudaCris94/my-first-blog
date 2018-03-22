@@ -1,0 +1,50 @@
+
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+
+<strong><div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard=”false” data-backdrop=”static”></strong> 
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-header">
+          <a href="{% url 'responsable:listado_responsables'%}" type="button" class="close"  aria-hidden="true">&times;</a>
+              <center><h4><span class="glyphicon glyphicon-warning-sign" ></span><b> ¡ATENCIÓN!</b> <span class="glyphicon glyphicon-warning-sign" ></span></h4> </center>
+           </div>
+<div class="modal-body" >
+
+<form method="post">
+	<center>
+	{% csrf_token %}
+	<h2>¿Desea eliminar el registro de {{ object.nombre }}?</h2>
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class="btn btn-default" href="{% url 'responsable:listado_responsables' %}">Cancelar</a>
+</center>
+</form>
+
+</div>
+
+<div class="modal-footer">
+          	<a href="{% url 'responsable:listado_responsables'%}"  class="btn btn-danger">CERRAR</a>
+           </div>
+      </div>
+   </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script>
+        $(document).ready(function()
+        {
+           $("#mostrarmodal").modal({
+           	backdrop: 'static',
+   			keyboard: false
+           });
+        });
+  </script>
+
+
+
+</body>
+{% endblock %}

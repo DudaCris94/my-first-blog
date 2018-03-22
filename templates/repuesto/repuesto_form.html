@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h4>Llene el formulario para agregar un nuevo repuesto:</h4>
+<hr/>
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<center><button type="submit" class="btn btn-primary">Guardar <span class="
+glyphicon glyphicon-floppy-disk" ></span></button></center>
+</form>
+
+{% endblock %}

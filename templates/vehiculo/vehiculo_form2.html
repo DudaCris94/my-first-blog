@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<strong><div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard=”false” data-backdrop=”static”></strong> 
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-header">
+          <a href="{% url 'vehiculo:listar_vehiculo'%}" type="button" class="close"  aria-hidden="true">&times;</a>
+              <center><h3>MODIFIQUE EL SIGUIENTE VEHÍCULO</h3></center>
+           </div>
+<div class="modal-body" >
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<center><button class=" btn btn-success" type="submit">Guardar <span class="
+glyphicon glyphicon-floppy-disk" ></span></button></center>
+</form>
+</div>
+
+<div class="modal-footer">
+          	<a href="{% url 'vehiculo:listar_vehiculo'%}"  class="btn btn-danger">CERRAR</a>
+           </div>
+      </div>
+   </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script>
+        $(document).ready(function()
+        {
+           $("#mostrarmodal").modal({
+           	backdrop: 'static',
+   			keyboard: false
+           });
+        });
+  </script>
+
+
+
+</body>
+
+{% endblock %}

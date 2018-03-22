@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h4>Saludos, {{user.username}}</h4>
+<hr/>
+<center><h2>LISTADO DE REPUESTOS EXISTENTES</h2></center>
+<hr/>
+
+{% if object_list %}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td><center><b>DETALLE</b></center></td>
+			<td><center><b>ORDEN</b></center></td>
+			<td><center><b>PRECIO</b></center></td>
+			<td><center><b>PROVEEDOR</b></center></td>
+			<td><center><b>CAMBIO MÁS RECIENTE</b></center></td>
+			<td><center><b>VEHICULO</b></center></td>
+			<td><center><b>KILOMETRAJE</b></center></td>
+			<td><center><b>RESPONSABLE</b></center></td>
+			<td><center><b>ACCIÓN</b></center></td>
+		</tr>
+
+	</thead>
+	<tbody>
+		
+		{% for repuesto in object_list reversed %}
+		<tr>
+			
+			<td>{{repuesto.detalle}}</td>
+			<td>{{repuesto.orden}}</td>
+			<td>{{repuesto.precio}}</td>
+			<td>{{repuesto.adquisicion}}</td>
+			<td>
+				{{repuesto.fechaCambio}}
+
+			</td>
+			<td>{{repuesto.responsable.vehiculo.placa}}</td>
+			<td>{{repuesto.kilometraje}}</td>
+			<td>{{repuesto.responsable.nombre}} {{repuesto.responsable.apellidos}}</td>
+			<td>
+				<center><a class="btn btn-primary" href="{% url 'repuesto:editar_repuestos' repuesto.id %}">Cambiar Repuesto <span class="glyphicon glyphicon-pencil"></span></a></center>
+				
+			</td>
+
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<center><h2>No hay registros de Repuestos</h2></center>
+		{% endif %}
+
+	</tbody>
+
+
+</table>
+
+<hr/>
+
+<ul class="pager">
+	
+	<li>
+		{% if page_obj.has_previous %}
+		<a href="?page={{ page_obj.previus_page_number }}">Anterior <span class="glyphicon glyphicon-chevron-left"></span></a>
+		{% endif %}
+	</li>
+	<li>
+		{% if page_obj.has_next %}
+		<a href="?page={{ page_obj.next_page_number }}">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></a>
+		{% endif %}
+	</li>
+</ul>
+
+{% endblock %}

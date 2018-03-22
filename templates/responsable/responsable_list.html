@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<center><h2>NÓMINA DE RESPONSABLES</h2></center>
+<hr/>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td><center><b>NÓMINA</b></center></td>
+			<td><center><b>CÉDULA</b></center></td>
+			<td><center><b>CARGO</b></center></td>
+			<td><center><b>VEHÍCULO DESIGNADO</b></center></td>
+			<td><center><b>ACCIONES</b></center></td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for responsable in object_list %}
+		<tr>
+			
+			<td><center>{{responsable.nombre}} {{responsable.apellidos}}</center></td>
+			<td><center>{{responsable.cedula}}</center></td>
+			<td><center>{{responsable.cargo}}</center></td>
+			<td><center>{{responsable.vehiculo.placa}}</center></td>
+			<td>
+				<center>
+				<a class="btn btn-primary" href="{% url 'responsable:editar_responsables' responsable.id %}">Editar  <span class="glyphicon glyphicon-pencil"></span></a>
+				<a class="btn btn-danger" href="{% url 'responsable:eliminar_responsable' responsable.id %}">Eliminar <span class="glyphicon glyphicon-trash"></span></a>
+				</center>
+				
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registros de Responsables</h1>
+		{% endif %}
+
+	</tbody>
+
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h4>Establezca el reporte a generar con su respectivo periodo:</h4>
+<hr/>
+
+<form action="." method="GET">
+	
+
+	<div class="input-group">
+
+		<span class="input-group-btn">
+    		
+    	</span>
+
+		<span class="input-group-btn">
+    		<h5><b>Reporte de:</b></h5>
+    	</span>
+
+		<span class="input-group-btn">
+			<select  type="text" class="form-control" name="r" value="{{ query3|escape }}">
+				
+				<option>---</option>
+				<option>CASAKORE</option>
+				<option>CULQUIMOTORS</option>
+				<option>REP. MACAS</option>
+				<option>P Y M</option>
+				<option>LLANTAS</option>
+				<option>COMPRAS EN EFECTIVO DE CARRO</option>
+				<option>COMPRAS EN EFECTIVO DE MOTO</option>
+
+			</select>
+    	</span>
+    	<span class="input-group-btn">
+    		
+    	</span>
+
+		<span class="input-group-btn">
+    		<h5><b>Desde:</b></h5>
+    	</span>
+	
+		<span class="input-group-btn">
+    		<input type="date" class="form-control" name="q" value="{{ query|escape }}">
+    	</span>
+    	<span class="input-group-btn">
+    		
+    	</span>
+    	<span class="input-group-btn">
+    		<h5><b>Hasta:</b></h5>
+    	</span>
+		
+    	<span class="input-group-btn">
+    		<input type="date" class="form-control" name="p" value="{{ query2|escape }}">
+		</span>
+		<span class="input-group-btn">
+    		<input class="btn btn-default"  type="submit" value="Buscar">
+    	</span>
+
+	</div>
+
+</form>
+
+
+{% if query and query2 and query3 %}
+<hr/>
+
+<center><h4 class="form-control"><b>REPORTE DE {{ query3|escape }} EN EL PERIODO DE <em>{{ query|escape }}</em> AL <em>{{ query2|escape }}</em> </b></h4></center>
+  
+
+{% if  repuestos %}
+<div>
+<center><a class="btn btn-success" href="{% url 'repuesto:imprimir' query query2 query3  %}" target="_blank">IMPRIMIR <span class="glyphicon glyphicon-print"></span></a></center>
+<hr/>
+</div>
+
+	
+	<table class="table table-bordered">
+			<thead>
+				<tr>
+					<td><center><b>RESPONSABLE</b></center></td>
+					<td><center><b>CARGO</b></center></td>
+					<td><center><b>PLACA</b></center></td>
+					<td><center><b>ORDEN</b></center></td>
+					<td><center><b>DETALLE</b></center></td>
+					<td><center><b>PRECIO</b></center></td>
+					<td><center><b>FECHA DE CAMBIO</b></center></td>
+					<td><center><b>KILOMETRAJE</b></center></td>
+					<td><center><b>FECHA DE CAMBIO ANTERIOR</b></center></td>
+				</tr>
+			</thead>
+			<tbody>
+
+	{% for r in repuestos %}
+	
+		
+
+				<tr> 
+					<td><centrer>{{r.responsable.nombre}} {{r.responsable.apellidos}}</centrer></td>
+					<td><centrer>{{r.responsable.cargo}}</centrer></td>
+					<td><centrer>{{r.responsable.vehiculo.placa}}</centrer></td>
+					<td><center>{{r.orden}}</center></td>
+					<td><center>{{r.detalle}}</center></td>
+					<td><center>{{r.precio}}</center></td>
+					<td><center>
+						{{r.fechaCambio}}
+					</center>
+					</td>
+					<td><center>{{r.kilometraje}}</center></td>
+					<td><center>
+						{% if r.fecha %}
+						{{r.fecha}}
+						{% else %}
+						Sin registro anterior
+						{% endif %}
+					</center>
+					</td>
+					
+				</tr>
+	
+
+
+	{% endfor %}
+
+			</tbody>
+		</table>
+		
+
+
+
+<hr/>
+{% if total %}
+	<h5><b>Total a Pagar:</b> ${{total}}</h5>
+{% endif %}
+{% else %}
+<hr/>
+<center><h4 class="form-control">¡No hay Registro de Repuestos en el periodo de tiempo señalado!</h4></center>
+{% endif %}
+{% endif %}
+<hr/>
+
+
+{% endblock %}

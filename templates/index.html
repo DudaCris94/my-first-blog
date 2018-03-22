@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Gestor de Repuestos
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block content %}
+<body class="login">
+<center><h1>BIENVENIDO AL SISTEMA DE GESTIÓN DE REPUESTOS</h1></center>
+<div class="container entrar">
+<form method="post">
+	{% csrf_token %}
+	<div class="row usuario">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="username" >Nombre de Usuario:</label>
+				<input class="form-control" type="text" name="username">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="username" >Contraseña:</label>
+				<input class="form-control" type="password" name="password">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<center><input class="btn btn-primary" type="submit" value="Ingresar"></center>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<center><a href="{% url 'password_reset' %}">Olvidé mi contraseña</a></center>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+
+{% if form.errors %}
+<div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3>¡ATENCIÓN!</h3>
+           </div>
+           <div class="modal-body">
+              <h4>Las Credenciales ingresadas son Inválidas</h4>    
+       </div>
+           <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn btn-danger">CERRAR</a>
+           </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script>
+        $(document).ready(function()
+        {
+           $("#mostrarmodal").modal("show");
+        });
+  </script>
+
+</body>
+
+
+{% endblock %}
+

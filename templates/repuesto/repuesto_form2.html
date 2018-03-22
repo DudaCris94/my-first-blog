@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<strong><div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard=”false” data-backdrop=”static”></strong> 
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-header">
+          <a href="{% url 'repuesto:lista_repuestos'%}" type="button" class="close"  aria-hidden="true">&times;</a>
+              <center><h3>CAMBIO DE REPUESTO A {{repuesto.responsable.vehiculo.placa}}</h3></center>
+           </div>
+           <div class="modal-body">
+            <form method="post">
+				{% csrf_token %}
+        {{ form.as_p }}
+
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="form-group">
+                      <label>Fecha del Cambio más Reciente</label>
+                        <input readonly="readonly" class="form-control" type="text" name="fecha" value="{{repuesto.fechaCambio|date:'Y-m-d'}}" >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="form-group">
+                      <label>Fecha del Último Cambio</label>
+                      <input class="form-control" type="date" name="fechaCambio" value="Introduzca la fecha del último cambio" >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="form-group">
+                      <button class="btn btn-primary" type="submit">GUARDAR</button>
+                    </div>
+                  </div>
+                </div>
+			</form>   
+       		</div>
+           <div class="modal-footer">
+          	<a href="{% url 'repuesto:lista_repuestos'%}"  class="btn btn-danger">CERRAR</a>
+           </div>
+      </div>
+   </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script>
+        $(document).ready(function()
+        {
+           $("#mostrarmodal").modal({
+           	backdrop: 'static',
+   			keyboard: false
+           });
+        });
+  </script>
+
+
+
+</body>
+
+{% endblock %}
+
+
+

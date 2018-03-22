@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h4>Llene el formulario para agregar un nuevo vehículo:</h4>
+<hr/>
+<div>
+<form  method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<center><button class="btn btn-primary" type="submit">Guardar  <span class="
+glyphicon glyphicon-floppy-disk" ></span></button></center>
+</form>
+</div>
+
+{% endblock %}

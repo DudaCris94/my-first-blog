@@ -1,0 +1,132 @@
+{% extends 'base/base.html' %}
+
+{% block extrastatic %}
+<Script Language="JavaScript">
+    function DameLaFechaHora() {
+      var hora = new Date()
+      var hrs = hora.getHours();
+      var min = hora.getMinutes();
+      var hoy = new Date();
+      var m = new Array();
+      var d = new Array()
+      var an= hoy.getYear();
+      m[0]="Enero";  m[1]="Febrero";  m[2]="Marzo";
+      m[3]="Abril";   m[4]="Mayo";  m[5]="Junio";
+      m[6]="Julio";    m[7]="Agosto";   m[8]="Septiembre";
+      m[9]="Octubre";   m[10]="Noviembre"; m[11]="Diciembre";
+      document.write("a las "+hrs+":"+min+" (");
+      document.write(hoy.getDate());
+      document.write(" de ");
+      document.write(m[hoy.getMonth()]);
+      document.write(")");
+    }
+  </Script>
+
+{% endblock %}
+
+{% block content %}
+
+<center>
+<table>
+				<tr>
+					<div >
+			
+						<td >
+							<center><h6>ESCUELA DE CAPACITACIÓN DE CONDUCTORES NO PROFESIONALES<br/></h6></center>
+							<center><h6>SPORTMANCAR CIA. LTDA.<br/></h6></center>
+							<center><h6>LOJA - ECUADOR<br/></h6></center>
+						</td>
+
+					</div>
+				</tr>
+				
+</table>
+</center>
+
+{% if query and query2 and query3 %}
+<hr/>
+
+<center><h4><b>REPORTE DE {{ query3|escape }} EN EL PERIODO DE <em>{{ query|escape }}</em> AL <em>{{ query2|escape }}</em> </b></h4></center>
+  
+<hr/>
+{% if  repuestos %}
+
+
+	
+	<table class="table table-bordered">
+			<thead>
+				<tr>
+					<td><center><h6><b>RESPONSABLE</b></h6></center></td>
+					<td><center><h6><b>CARGO</b></h6></center></td>
+					<td><center><h6><b>PLACA</b></h6></center></td>
+					<td><center><h6><b>ORDEN</b></h6></center></td>
+					<td><center><h6><b>DETALLE</b></h6></center></td>
+					<td><center><h6><b>PRECIO</b></h6></center></td>
+					<td><center><h6><b>FECHA DE CAMBIO</b></h6></center></td>
+					<td><center><h6><b>KILOMETRAJE</b></h6></center></td>
+					<td><center><h6><b>FECHA DE CAMBIO ANTERIOR</b></h6></center></td>
+				</tr>
+			</thead>
+			<tbody>
+
+	{% for r in repuestos %}
+	
+		
+
+				<tr> 
+					<td><centrer><h6>{{r.responsable.nombre}} {{r.responsable.apellidos}}</h6></centrer></td>
+					<td><centrer><h6>{{r.responsable.cargo}}</h6></centrer></td>
+					<td><centrer><h6>{{r.responsable.vehiculo.placa}}</h6></centrer></td>
+					<td><center><h6>{{r.orden}}</h6></center></td>
+					<td><center><h6>{{r.detalle}}</h6></center></td>
+					<td><h6><center>{{r.precio}}</center></center></td>
+					<td><center>
+						<h6>{{r.fechaCambio}}</h6>
+					</center>
+					</td>
+					<td><center><h6>{{r.kilometraje}}</h6></center></td>
+					<td><center>
+						{% if r.fecha %}
+						<h6>{{r.fecha}}</h6>
+						{% else %}
+						<h6>Sin registro anterior</h6>
+						{% endif %}
+					</center>
+					</td>
+					
+				</tr>
+	
+
+
+	{% endfor %}
+
+			</tbody>
+		</table>
+		
+
+
+
+<hr/>
+{% if total %}
+	<h5><b>Total a Pagar:</b> ${{total}}</h5>
+{% endif %}
+{% else %}
+<hr/>
+<center><h4 class="form-control">¡No hay Registro de Repuestos en el periodo de tiempo señalado!</h4></center>
+{% endif %}
+{% endif %}
+<hr/>
+<h5>GENERADO POR:</h5>
+<center><h6>___________________________________</h6></center>
+<center><h6> {{user.first_name|upper}} {{user.last_name|upper}}  </h6></center>
+<center><h6><b>SUPERVISOR AUTORIZADO</b></h6></center>
+
+<hr/>
+
+<body>
+  <h6>Reporte impreso 
+  <script>
+    DameLaFechaHora();
+  </script></h6>
+
+{% endblock %}

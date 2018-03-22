@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<center><h2>LISTADO DE VEHÍCULOS</h2></center>
+<hr/>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td><center><b>PLACA</b></center></td>
+			<td><center><b>MARCA</b></center></td>
+			<td><center><b>TIPO</b></center></td>
+			<td><center><b>COLOR</b></center></td>
+			<td><center><b>ACCIONES</b></center></td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if vehiculos %}
+		{% for vehiculo in vehiculos%}
+		<tr>
+			
+			<td><center>{{vehiculo.placa}}</center></td>
+			<td><center>{{vehiculo.marca}}</center></td>
+			<td><center>{{vehiculo.tipo}}</center></td>
+			<td><center>{{vehiculo.color}}</center></td>
+			<td>
+				<center>
+				<a class="btn btn-primary" href="{% url 'vehiculo:vehiculo_editar' vehiculo.id %}">Editar <span class="glyphicon glyphicon-pencil"></span></a>
+				<a class="btn btn-danger" href="{% url 'vehiculo:vehiculo_eliminar' vehiculo.id %}">Eliminar <span class="glyphicon glyphicon-trash"></span></a>
+			    </center>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registros de vehiculos </h1>
+		{% endif %}
+
+	</tbody>
+
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+div.entrar {
+	margin-top: 50px;
+	background: #22794e;
+	color: #fff;
+	height: 350px;
+	width: 980px;
+}
+
+div.usuario {
+	margin-top: 50px;
+}
+
+body.login{
+	background-image: url("../imagenes/fondo.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #464646;
+
+}
