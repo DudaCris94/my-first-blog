@@ -53,8 +53,8 @@ class ResponsableForm2(forms.ModelForm):
 		}
 
 		widgets = {
-			'nombre' : forms.TextInput(attrs={'class': 'form-control','readonly':'readonly','type':'text'}),
-			'apellidos' : forms.TextInput(attrs={'class': 'form-control', 'readonly':'readonly','type':'text'}),
+			'nombre' : forms.TextInput(attrs={'class': 'form-control'}),
+			'apellidos' : forms.TextInput(attrs={'class': 'form-control'}),
 			'cedula' : forms.TextInput(attrs={'class': 'form-control'}),
 			'cargo' : forms.TextInput(attrs={'class': 'form-control'}),
 			'vehiculo' : forms.Select(attrs={'class': 'form-control'}),
